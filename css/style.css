@@ -95,8 +95,16 @@ footer {
 
 
 
+#scrollpanel {
+  width: 75%;
+  height: 45vh;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
 #buttons button, form {
   display: inline-block;
+  margin-top: 10vh;
 }
 
 #result {
@@ -112,7 +120,7 @@ footer {
 }
 
 
-.icongrid {
+#icongrid {
   margin: 0 auto;
   width: 75vw; 
   height:70vh; 
@@ -141,12 +149,6 @@ td {
 }
 #addIcon {
   text-align:right;
-}
-
-#content {
-    text-align: center;
-    height: 100%;
-    width: 100%;
 }
 
 
