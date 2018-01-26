@@ -122,10 +122,11 @@ margin-top: 10vh;
     border-radius: 25px;
     border: 2px solid #ADD8E6;
     padding: 10px;
-    width: 300px;
-    height: 70px;
+    width: 16vw;
+    height: 5vw;
     text-align: center;
-    margin-left: 125px;
+    margin-left: 10vw;
+    font-size:vw;
 }
 
 #buttonsresultpage {
