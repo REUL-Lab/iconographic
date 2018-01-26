@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="css/icomoon.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<!-- jQuery UI style -->
+	<link rel="stylesheet" href="js/jquery-ui/jquery-ui.min.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -33,6 +35,8 @@
 
     <!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="js/jquery-ui/jquery-ui.min.js"></script>
 	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -44,7 +48,16 @@
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
 
-  
+
+	<!-- ReportComboBox JS -->
+	<script src="js/adminedit.js"></script>
+
+
+    <script>
+	
+
+	</script>
+
     
 
 
@@ -57,88 +70,73 @@
 				<tr>
 					
 					<td id="icon1">
-						<img src="https://jma93.github.io/images/billing.PNG" alt="billing">
+						<img src="https://REUL-Lab.github.io/iconographic/images/billing.PNG" alt="billing">
 					</td>
 					<td id = "icon1Description">
 						<h7>Description</h7>
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 					</td>
 					<td id = "edit1">
-
-						<button id="iconEdit"><center>Edit</center></button>
-					</td>
-					<td id = "remove1">
-						<button id="iconEdit"><center>Remove</center></button>
+						<button id="iconEdit" onclick="editIcon()"><center>Edit</center></button>
 					</td>
 				</tr>
 				<tr>
 					
 					<td id="icon2">
-						<img src="https://jma93.github.io/images/gagWrap.PNG" alt="gagWrap">
+						<img src="https://REUL-Lab.github.io/iconographic/images/gagWrap.PNG" alt="gagWrap">
 					</td>
 					<td id = "icon2Description">
 						<h7>Description</h7>
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 					</td>
 					<td id = "edit2">
-						<button id="iconEdit">Edit</button>
-					</td>
-					<td id = "remove2">
-						<button id="iconEdit">Remove</button>
+						<button id="iconEdit" onclick="editIcon()">Edit</button>
 					</td>
 				</tr>
 				<tr>
 					
 					<td id="icon3">
-						<img src="https://jma93.github.io/images/restrictions.PNG" alt="restrictions">
+						<img src="https://REUL-Lab.github.io/iconographic/images/restrictions.PNG" alt="restrictions">
 					</td>
 					<td id = "icon3Description">
 						<h7>Description</h7>
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 					</td>
 					<td id = "edit3">
-						<button id="iconEdit">Edit</button>
-					</td>
-					<td id = "remove3">
-						<button id="iconEdit">Remove</button>
+						<button id="iconEdit" onclick="editIcon()">Edit</button>
 					</td>
 				</tr>
 				<tr>
 					
 					<td id="icon4">
-						<img src="https://jma93.github.io/images/termination.PNG" alt="terminations">
+						<img src="https://REUL-Lab.github.io/iconographic/images/termination.PNG" alt="terminations">
 					</td>
 					<td id = "icon4Description">
 						<h7>Description</h7>
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 					</td>
 					<td id = "edit4">
-						<button id="iconEdit">Edit</button>
-					</td>
-					<td id = "remove4">
-						<button id="iconEdit">Remove</button>
+						<button id="iconEdit" onclick="editIcon()">Edit</button>
 					</td>
 				</tr>
 				<tr>
 					
 					<td id="icon5">
-						<img src="https://jma93.github.io/images/unexpected.PNG" alt="unexpected">
+						<img src="https://REUL-Lab.github.io/iconographic/images/unexpected.PNG" alt="unexpected">
 					</td>
 					<td id = "icon5Description">
 						<h7>Description</h7>
 						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 					</td>
 					<td id = "edit5">
-						<button id="iconEdit">Edit</button>
-					</td>
-					<td id = "remove5">
-						<button id="iconEdit">Remove</button>
+						<button id="iconEdit" onclick="editIcon()">Edit</button>
 					</td>
 				</tr>		
 			</table>
 		</div>
-		<p>
+		<div id="editbox"></div>
 		<div id="footer">
+			<br>
 			<div id="feedback">
 				<button id="addIcon">Add Icon</button>
 				<form action = "userFeedback.html"><button>See User Feedback</button></form>
