@@ -43,6 +43,7 @@ left: 0;
 bottom: 0;
 width: 100%;
 height: 100px;
+background-color: white;  
 }
 
 .footer-buttons {
@@ -170,6 +171,9 @@ text-align: right;
 }
 #addIcon {
 text-align:right;
+}
+.ui-dialog-titlebar-close {
+    display: none;
 }
 
 
