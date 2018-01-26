@@ -28,6 +28,7 @@ margin-bottom: 1em;
 
 #analyze {
 text-align: center;
+
 }
 
 .centered {
@@ -45,7 +46,6 @@ height: 100px;
 .footer-buttons {
 display: flex;
 justify-content: space-between;
-
 }
 
 .footer-buttons button {
@@ -90,6 +90,31 @@ display: inline-block;
 margin-top: 10vh;
 }
 
+
+#wrap,#title,#wrapper {
+    text-align: left;
+    margin-left: 100px;
+}
+#analyzebutton,#helpbutton,#backbutton {
+    position: relative;
+    border-radius: 25px;
+    border: 2px solid #ADD8E6;
+    padding: 10px;
+    width: 100px;
+    height: 70px; 
+    text-align: center
+
+}
+
+#downloadbutton, #backtohome, #reportbutton, #backtomain,#mainbutton, #loginbutton {
+    border-radius: 25px;
+    border: 2px solid #ADD8E6;
+    padding: 10px;
+    width: 260px;
+    height: 70px; 
+    text-align: center
+}   
+
 #result {
 text-align: center;
 margin: 0 auto;
@@ -102,6 +127,18 @@ display: inline-block;
 margin: 10px;
 }
 
+
+#resultIcon {
+    text-align: center;
+}
+
+#icongridResult {
+    margin: 0 auto;
+    width: 75vw; 
+    height:70vh; 
+    overflow:auto;
+    border: 1px solid black;
+}
 
 #icongrid {
 margin: 0 auto;
@@ -146,11 +183,13 @@ color: #7f7f7f;
 background: #fff;
 height: 100%;
 position: relative;
+padding-bottom: 50px;
+
 }
 #iconEdit {
 border-radius: 25px;
 border: 2px solid #ADD8E6;
-padding: 20px; 
+padding: 20px;
 width: 150px;
 height: 75px; 
 text-align: center
@@ -187,6 +226,5 @@ h7 {
 color: #000;
 font-family: "Work Sans", Arial, sans-serif;
 font-weight: 300;
-margin: 0 0 30px 0;
 font-size:20px;
 }
