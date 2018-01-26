@@ -71,9 +71,24 @@
 	<script src="js/reportcombobox.js"></script>
 
 	<script>
-		function goBack() {
-			window.history.back();
-		}
+
+			function goBack() {
+				window.history.back();
+			}
+
+			function helpClick() {
+				$('#helpbox').dialog({
+					modal:true,
+					width:600,
+					height:600
+				});
+				$('#helpbox').show();
+			}
+
+			function cancelHelp (){
+				$("#helpbox").dialog('close');
+	  
+			}
 
 	</script>
 	</head>
@@ -100,7 +115,7 @@
 				<div id = "wrap">
 					<form action="index.html"><button id="backbutton" onclick="goBack()">Back</button></form>
 					<button id="reportbutton" onclick="reportIssue()">Report an Issue </button>
-					<button id="helpbutton" onclick="">Help</button>
+					<button id="helpbutton" onclick="helpClick()">Help</button>
 				</div>
 			
 		</ul>	
@@ -109,6 +124,9 @@
 	
 	
 	<div id="reportbox"></div>
+	<div id="helpbox" hidden>
+		<button id="cancelButton" onclick="cancelHelp()">Close</button>
+	</div>
 	
 	
 
