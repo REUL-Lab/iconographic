@@ -3,7 +3,19 @@ from sklearn import externals
 class FileReader:
 
     def getDataFromText(text=""):
+        data = text.split("\n")
 
+        # #if we want to do things by smaller granularity
+        # temp = text.split(".")
+        # dataIndex = 0
+        # data = []
+        # for i in xrange(0, len(temp)):
+        #     if (i + 1 < len(temp)):
+        #         data[dataIndex++] = temp[i] + temp[i+1]
+        #     else:
+        #         data[dataIndex++] = temp[i]
+
+        return data
 
 
     def getDataFromFile(input=None):
