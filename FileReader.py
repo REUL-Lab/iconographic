@@ -24,9 +24,27 @@ class FileReader:
 class Classify:
 
     def predictLabels(data, classifier):
+        return classifer.predict(data)
+
+    def modifyText(data=[],labels=[]):
+        modFile = open("LabeledData.txt","w")
+        for i in xrange(0,len(data)):
+            if labels[i] not "None":
+                modFile.write("-----------------" + labels[i] + "--------------------\n")
+                modFile.write(data[i])
+
+        modFile.close()
+        return modFile
 
 
-    def modifyText(data):
+class Converter:
+
+
+    def doc2txt:
+
+
+    def pdf2txt:
+
 
 
 def main:
@@ -42,7 +60,10 @@ def main:
     classifier = externals.joblib.load("EULA_Classifier.pkl")
     rslt = Classify()
 
-    (output, labels) = rslt.predictLabels(data,classifier)
+    labels = rslt.predictLabels(data,classifier)
+    #if they call download a summary
+    #output = rslt.modifyText(data, labels)
+    #urllib should allow for downloading this file on the users machine
 
 
 
