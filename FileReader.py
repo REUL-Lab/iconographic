@@ -1,7 +1,10 @@
 from sklearn import externals
 
+
+#This is the way we read through the user input text
 class FileReader:
 
+    #Method to take the textbox input and convert it into data
     def getDataFromText(text=""):
         data = text.split("\n")
 
@@ -17,15 +20,18 @@ class FileReader:
 
         return data
 
+    #Reading through a file input and creating data
+    def getDataFromFile(inpt=None):
 
-    def getDataFromFile(input=None):
 
-
+#Class that will classify the user input
 class Classify:
 
+    #Predicts the labels for the user input
     def predictLabels(data, classifier):
         return classifer.predict(data)
 
+    #Creates a txt file for download if the user wants
     def modifyText(data=[],labels=[]):
         modFile = open("LabeledData.txt","w")
         for i in xrange(0,len(data)):
@@ -49,14 +55,16 @@ class Converter:
 
 def main:
     flr = FileReader()
-    #If radio button of text box checked
     data = []
     if (1==1):
+        #If radio button of text box checked
         data = flr.getDataFromText()
     else:
+        #If radio button of file is checked
         data = flr.getDataFromFile()
 
 
+    #Import the classifier from the pickle file
     classifier = externals.joblib.load("EULA_Classifier.pkl")
     rslt = Classify()
 
