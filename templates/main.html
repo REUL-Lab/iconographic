@@ -93,29 +93,30 @@
 	<div class="input">
 		<h3 class="title">Choose one:</h3>
 		<ul>
-				<div id="wrapper">
-					<div id="analyze">
-							<form action="result" method="POST">
-								File Input (.doc, .docx, .pdf, .txt):<input type="file" id="file-input" accept=".doc, .docx, .pdf, .txt">
-								<p></p>
-					
-								Text Input:<br><textarea id="text-input" placeholder="Type or copy EULA text here" name="text"></textarea>
-								<input type="submit" value="Analyze" >
-						</form>
-					</div>
+			<div id="wrapper">
+				<div style="float:left">
+				<form action="result-file" method="POST" enctype = "multipart/form-data">
+						File Input (.doc, .docx, .pdf, .txt): <input type="file" accept=".doc, .docx, .pdf, .txt" name="file" required><br><br>
+						<input type="submit" value="Analyze" >
+				</form>
 				</div>
-				<p>
-				</p>
-				<div id = "wrap">
-					<form action="/"><button id="backbutton">Back</button></form>
-					<button id="reportbutton">Report an Issue </button>
-					<button id="helpbutton" onclick="helpClick()">Help</button>
+				<div style="float:left">
+					<form action="result" method="POST">
+						Text Input:<br><textarea id="text-input" rows="20" cols="80" placeholder="Type or copy EULA text here" name="text" required></textarea><br><br>
+						<input type="submit" value="Analyze" >
+					</form>
 				</div>
-			
-		</ul>	
-		
+			</div>
+			<p></p>
+			</ul>	
 	</div>
-	
+	<footer>
+		<div id = "wrap" style="text-align:center">
+			<form action="/"><button id="backbutton">Back</button></form>
+			<button id="reportbutton">Report an Issue </button>
+			<button id="helpbutton" onclick="helpClick()">Help</button>
+		</div>
+	</footer>
 	
 	<div id="reportbox"></div>
 	<div id="helpbox" hidden>

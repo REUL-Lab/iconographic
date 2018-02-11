@@ -1,8 +1,8 @@
 Instructions for use:
 
-Requires python and Flask to be installed.
+Requires python to be installed.
 
-To install flask, run "pip install Flask" on command line.
+To install dependencies, run "pip install -r requirements.txt" on command line.
 
 To run:
 

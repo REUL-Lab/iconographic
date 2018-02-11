@@ -73,72 +73,19 @@
 		<h1 class="title">Here is a summary of your EULA</h1>
 		<div class="icongridResult">
 			<table width = "1000" align = "center">
+				{% for icon in result %}
 				<tr>
-					<td colspan="2">{{ data }}</td>
-					
-				</tr>
-				<tr>
-					<td id="icon1"  colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/billing.PNG" alt="billing">
+					<td colspan="2">
+						<img src="https://REUL-Lab.github.io/iconographic/images/{{ icon }}.PNG">
 					</td>
-					<td id = "resultIcon">
+					<td>
 						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+						<p> Description for icon: {{ icon }} </p>
 					</td>
 				</tr>
-				<tr>
-
-					<td id="icon2" colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/gagWrap.PNG" alt="gagWrap">
-					</td>
-					<td id = "resultIcon">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-				</tr>
-				<tr>
-
-					<td id="icon3" colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/restrictions.PNG" alt="restrictions">
-					</td>
-					<td id = "resultIcon">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-				</tr>
-				<tr>	
-
-					<td id="icon4" colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/termination.PNG" alt="terminations">
-					</td>
-					<td id = "resultIcon">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-				</tr>
-				<tr>
-
-					<td id="icon5" colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/unexpected.PNG" alt="unexpected">
-					</td>
-					<td id = "resultIcon">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-				</tr>
+				{% endfor %}
 			</table>
-		</div><br><br>
-
-		<!-- janky way to add spaces to the bottom of the html page -->
-		<p>
-		</p>
-		<p>
-		</p>
-		<p>
-		</p>
-		<p>
-		</p>
-		<!-- janky way to add spaces to the bottom of the html page -->
+		</div>
 		<footer>
 			<div id="buttonsresultpage">
 				<a href="placeholder.txt" download><button id="downloadbutton">Download Summary</button></a>

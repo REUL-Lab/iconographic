@@ -26,12 +26,22 @@ def main():
 def analyze():
     if request.method == 'POST':
         data = request.form['text']
+        if data == "":
+            return render_template('result.html', result="Placeholder")
         # do shit with data
-
-        return render_template('result.html', data=data)
+        iconlist = data.splitlines()
+        return render_template('result.html', result=iconlist)
     else:
-        return render_template('result.html', data="Placeholder")
+        return render_template('result.html', result="Placeholder")
 
+
+@app.route('/result-file', methods=['POST'])
+def analyzefile():
+    f = request.files['file']
+    if f:
+        text = str(f.read(), 'utf-8')
+        iconlist = text.splitlines()
+        return render_template('result.html', result=iconlist)
 
 @app.route('/userFeedback')
 def feedback():
