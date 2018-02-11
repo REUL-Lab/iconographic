@@ -1,3 +1,4 @@
+from FileReader import *
 from flask import *
 app = Flask(__name__)
 
@@ -24,23 +25,26 @@ def main():
 
 @app.route('/result', methods=['GET', 'POST'])
 def analyze():
+
+    fr = FileReader()
     if request.method == 'POST':
         data = request.form['text']
         if data == "":
-            return render_template('result.html', result="Placeholder")
+            return render_template('result.html', result=["Placeholder"])
         # do shit with data
-        iconlist = data.splitlines()
+        iconlist = FileReader.textSplit(data)
         return render_template('result.html', result=iconlist)
     else:
-        return render_template('result.html', result="Placeholder")
+        return render_template('result.html', result=["Placeholder"])
 
 
 @app.route('/result-file', methods=['POST'])
 def analyzefile():
+    
     f = request.files['file']
     if f:
         text = str(f.read(), 'utf-8')
-        iconlist = text.splitlines()
+        iconlist = FileReader.fileSplit(text)
         return render_template('result.html', result=iconlist)
 
 @app.route('/userFeedback')
