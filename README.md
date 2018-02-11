@@ -1,11 +1,12 @@
 Instructions for use:
 
-Requires python to be installed.
+Requires python and Flask to be installed.
 
-Open terminal and navigate to directory with html files.
-Run "python -m SimpleHTTPServer"
-Keep the terminal open.
+To install flask, run "pip install Flask" on command line.
 
-Open a browser and navigate to http://localhost:8000.
+To run:
+
+Windows: click on the run.bat, then navigate to http://localhost:5000
+Mac: Right click on the run file (not run.bat), go to "Show Info", and change permissions to 755 (only needs to be done once).  Then open terminal and type ./run, then navigate to http://localhost:5000
 
 Website link: reul-lab.github.io/iconographic
