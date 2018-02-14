@@ -1,5 +1,5 @@
 from sklearn import externals
-
+import pickle
 
 #This is the way we read through the user input text
 class FileReader:
@@ -8,17 +8,16 @@ class FileReader:
     @staticmethod
     def textSplit(text):
 
-        data = text.splitlines()
 
-        # #if we want to do things by smaller granularity
-        # temp = text.split(".")
-        # dataIndex = 0
-        # data = []
-        # for i in xrange(0, len(temp)):
-        #     if (i + 1 < len(temp)):
-        #         data[dataIndex++] = temp[i] + temp[i+1]
-        #     else:
-        #         data[dataIndex++] = temp[i]
+        #if we want to do things by smaller granularity
+        temp = text.split(".")
+        rawdata = []
+        for i in range(0, len(temp)):
+            if (i + 3 < len(temp)):
+                rawdata.append(temp[i] + temp[i+1] + temp[i+2] + temp[i+3])
+            else:
+                rawdata.append(temp[i])
+
 
         #Import the classifier from the pickle file
         
@@ -26,29 +25,35 @@ class FileReader:
 
         #Uncomment when classifier works
         #labels = rslt.predictLabels(data,classifier)
+        classifier = externals.joblib.load("EULA_Classifier.pkl")
+        vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+        data = vectorizer.transform(rawdata)
+        labels = classifier.predict(data)
 
         
-        #labels = set(labels)
+        labels = set(labels)
         # labels = ["permissions"]
-        return data
-        # return labels
+        #return data
+        return labels
 
     @staticmethod
     def fileSplit(fle):
-        data = fle.splitlines()
+        temp = fle.split(".")
+        rawdata = []
+        for i in range(0, len(temp)):
+            if (i + 3 < len(temp)):
+                rawdata.append(temp[i] + temp[i+1] + temp[i+2] + temp[i+3])
+            else:
+                rawdata.append(temp[i])
 
-        #classifier = externals.joblib.load("EULA_Classifier.pkl")
+        classifier = externals.joblib.load("EULA_Classifier.pkl")
+        vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
+        data = vectorizer.transform(rawdata)
+        labels = classifier.predict(data)
 
-        #Import the classifier from the pickle file
-
-        #uncomment when classifier works
-        #labels = rslt.predictLabels(data,classifier)
-
-        return data
-        #labels = set(labels)
-        # labels = ["permissions"]
-
-        # return labels
+        
+        labels = set(labels)
+        return labels
 
     @staticmethod
     def modifyText(data=[],labels=[]):
