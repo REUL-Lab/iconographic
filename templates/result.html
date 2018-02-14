@@ -73,14 +73,15 @@
 		<h1 class="title">Here is a summary of your EULA</h1>
 		<div class="icongridResult">
 			<table width = "1000" align = "center">
-				{% for icon in result %}
+				{% for text, label in result.items() %}
 				<tr>
 					<td colspan="2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/{{ icon }}.PNG">
+						<!-- <img src="https://REUL-Lab.github.io/iconographic/images/{{ icon }}.PNG"> -->
+						{{ label }}
 					</td>
 					<td>
-						<h7>Description</h7>
-						<p> Description for icon: {{ icon }} </p>
+						<h7>Text:</h7>
+						<p> {{ text }} </p>
 					</td>
 				</tr>
 				{% endfor %}

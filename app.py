@@ -26,16 +26,16 @@ def main():
 @app.route('/result', methods=['GET', 'POST'])
 def analyze():
 
-    fr = FileReader()
     if request.method == 'POST':
         data = request.form['text']
         if data == "":
-            return render_template('result.html', result=["Placeholder"])
+            return redirect('/main')
         # do shit with data
         iconlist = FileReader.textSplit(data)
+        print(iconlist)
         return render_template('result.html', result=iconlist)
     else:
-        return render_template('result.html', result=["Placeholder"])
+        return redirect('/main')
 
 
 @app.route('/result-file', methods=['POST'])
