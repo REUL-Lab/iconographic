@@ -29,6 +29,10 @@
 	<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
 	<![endif]-->
 
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-database.js"></script>
+
 	<!-- jQuery -->
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<!-- jQuery UI -->
@@ -54,7 +58,10 @@
 
 
     <script>
-	
+		$(document).ready(function(){
+			console.log(firebase.app());
+			console.log(firebase.auth().currentUser);
+		});
 
 	</script>
 
@@ -64,7 +71,8 @@
 	</head>
 
     <body>
-        <h1 class="title">Admin Portal</h1>
+		<h1 class="title">Admin Portal</h1>
+		{{ labels }}
 		<div class="icongrid">
 			<table>
 				<tr>
@@ -140,11 +148,11 @@
 				<button id = "userfeedback">See User Feedback
 				</button>
 			</form>
-			<form action="login">
+			<form action="logout">
 				<button id ="logout">Logout</button>
 			</form>
 			<form action="/">
-				<button id = "logouthome">Logout to Home</button>
+				<button id = "logouthome">Return to Home</button>
 			</form>
 		</footer>
     </body>

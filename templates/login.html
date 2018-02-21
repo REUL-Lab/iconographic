@@ -48,31 +48,36 @@
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     <script>
-		$(document).ready(function(){	
-			if (!firebase.apps.length) {
-				var config = {
-					apiKey: "AIzaSyBNeqANlaGZOcRX0aT_i1YfDbiCpTgfHqI",
-					authDomain: "flickering-fire-3792.firebaseapp.com",
-					databaseURL: "https://flickering-fire-3792.firebaseio.com",
-					projectId: "flickering-fire-3792",
-					storageBucket: "flickering-fire-3792.appspot.com",
-					messagingSenderId: "189921954509"
-				};
-				firebase.initializeApp(config);
-			}		
-			if (firebase.auth().currentUser) {
-				window.location.replace("/admin");
-			}
-		});
-		function login() {
-			var username = $("#username").val();
-			var password = $("#password").val();
-			firebase.auth().signInWithEmailAndPassword(username, password).then(function(firebaseUser) {
-				window.location.href = '/admin';
-			}).catch(function(error){
-				alert(error);
-			});
-		}
+		// $(document).ready(function(){	
+		// 	if (!firebase.apps.length) {
+		// 		var config = {
+		// 			apiKey: "AIzaSyBNeqANlaGZOcRX0aT_i1YfDbiCpTgfHqI",
+		// 			authDomain: "flickering-fire-3792.firebaseapp.com",
+		// 			databaseURL: "https://flickering-fire-3792.firebaseio.com",
+		// 			projectId: "flickering-fire-3792",
+		// 			storageBucket: "flickering-fire-3792.appspot.com",
+		// 			messagingSenderId: "189921954509"
+		// 		};
+		// 		firebase.initializeApp(config);
+		// 	}		
+		// 	if (firebase.auth().currentUser) {
+		// 		window.location.replace("/admin");
+		// 	}
+		// });
+		// function login() {
+		// 	var username = $("#username").val();
+		// 	var password = $("#password").val();
+		// 	firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
+		// 		firebase.auth().signInWithEmailAndPassword(username, password).then(function(firebaseUser) {
+		// 			window.location.href = '/admin';
+		// 		}).catch(function(error){
+		// 			alert(error);
+		// 		});
+		// 	}).catch(function(error){
+		// 		alert(error);
+		// 	});
+			
+		// }
 
     </script>
     
@@ -83,16 +88,21 @@
     <body>
         <h1 class="title">Admin Login</h1>
             <div id="inputs" class="centered">
-				<label><b>Username:</b></label>
-				<input type="text" placeholder="Enter Username" id="username">
-				<br><br>
-				<label><b>Password:</b></label>
-				<input type="password" placeholder="Enter Password" id="password">
-				<br><br>
-				<div id="input-buttons">
-					<button onclick="window.location.href='/'">Back</button>
-					<button onclick="login()">Submit</button>
-				</div>
+				<form action="login" method="POST">
+					<label><b>Username:</b></label>
+					<input type="email" placeholder="Enter Username" name="username">
+					<br><br>
+					<label><b>Password:</b></label>
+					<input type="password" placeholder="Enter Password" name="password">
+					<br><br>
+					<div id="input-buttons">
+						<input type="submit" formaction="/" value="Back">
+						<input type="submit" value="Submit">
+					</div>
+				</form>
+				{% if error %}
+				<p><strong>Error:</strong> {{ error }}
+				{% endif %}
             </div>
     </body>
 
