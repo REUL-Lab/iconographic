@@ -7,16 +7,12 @@ app = Flask(__name__)
 def start():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
     return render_template('login.html')
 
-@app.route('/admin', methods=['GET','POST'])
+@app.route('/admin', )
 def admin():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        # check w/ db
     return render_template('admin.html')
 
 @app.route('/main')
