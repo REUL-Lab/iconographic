@@ -27,10 +27,6 @@
 	<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
 	<![endif]-->
 
-	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-database.js"></script>
-
 	<!-- jQuery -->
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<!-- jQuery UI -->
@@ -46,42 +42,6 @@
 
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-    <script>
-		// $(document).ready(function(){	
-		// 	if (!firebase.apps.length) {
-		// 		var config = {
-		// 			apiKey: "AIzaSyBNeqANlaGZOcRX0aT_i1YfDbiCpTgfHqI",
-		// 			authDomain: "flickering-fire-3792.firebaseapp.com",
-		// 			databaseURL: "https://flickering-fire-3792.firebaseio.com",
-		// 			projectId: "flickering-fire-3792",
-		// 			storageBucket: "flickering-fire-3792.appspot.com",
-		// 			messagingSenderId: "189921954509"
-		// 		};
-		// 		firebase.initializeApp(config);
-		// 	}		
-		// 	if (firebase.auth().currentUser) {
-		// 		window.location.replace("/admin");
-		// 	}
-		// });
-		// function login() {
-		// 	var username = $("#username").val();
-		// 	var password = $("#password").val();
-		// 	firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
-		// 		firebase.auth().signInWithEmailAndPassword(username, password).then(function(firebaseUser) {
-		// 			window.location.href = '/admin';
-		// 		}).catch(function(error){
-		// 			alert(error);
-		// 		});
-		// 	}).catch(function(error){
-		// 		alert(error);
-		// 	});
-			
-		// }
-
-    </script>
-    
-
 
 	</head>
 

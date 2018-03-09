@@ -49,12 +49,25 @@
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-	<!-- ReportComboBox JS -->
+	<!-- ReportComboBox JS 
 	<script src="{{ url_for('static', filename='js/reportcombobox.js') }}"></script>
-
+	-->
 	<script>
 		function stall() {
 			setTimeout(showPage, 2);
+		}
+
+		function reportClick() {
+			$('#reportbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#reportbox').show();
+		}
+
+		function cancelReport (){
+			$("#reportbox").dialog('close');
 		}
 
 		function showPage() {
@@ -94,12 +107,25 @@
 				<form action="/">
 					<button id="backtohome">Back to Home</button>
 				</form>
-				<button id="reportbutton" onclick="reportIssue()">Report an Issue</button>
+				<button id="reportbutton" onclick="reportClick()">Report an Issue</button>
 			</div>
 		</footer>
 
-	<div id="reportbox"></div>
+	<div id="reportbox" hidden>
+		<form action="/report-result" method="POST">
+			<select name="label">
+				<option value="Errors">An error ocurred</option>
+				<option value="Concerns">An issue arose</option>
+				<option value="Feedback">User Feedback</option>
+				<option value="Other">Other</option>
+			</select>
+			<br>
+			<br><textarea name="text" placeholder="Type your issue here" style="width:500px; height:300px; resize:none" required></textarea>
+			<br>
 
-
+			<button id="reportCancel" type="button" onclick="cancelReport()">Cancel</button>
+			<input type="submit" name="report" value="Submit">
+		</form>
+	</div>
 	</body>
 </html>

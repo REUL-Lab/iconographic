@@ -13,6 +13,7 @@ config = {
 }
 firebase = pyrebase.initialize_app(config)
 user = None
+saved_result = None
 
 @app.route('/', methods=['GET','POST'])
 def start():
@@ -48,8 +49,9 @@ def admin():
         return redirect('/login')
     else:
         db = firebase.database()
-        labels = db.child("labels").get().val()
-        return render_template('admin.html', labels=labels)
+        labels = [label.val() for label in db.child("Labels").get().each()]
+        imgurls = ["https://REUL-Lab.github.io/iconographic/images/"+label+".png" for label in labels]
+        return render_template('admin.html', labels=zip(labels,imgurls))
 
 @app.route('/main')
 def main():
@@ -57,38 +59,91 @@ def main():
 
 @app.route('/result', methods=['GET', 'POST'])
 def analyze():
-
+    global saved_result
     if request.method == 'POST':
         data = request.form['text']
         if data == "":
             return redirect('/main')
-        # do shit with data
         iconlist = FileReader.textSplit(data)
-        print(iconlist)
+        
+        db = firebase.database()
+        labels = [label.val() for label in db.child("Labels").get().each()]
+        for text, labelid in iconlist.items():
+            iconlist[text] = labels[labelid]
+
+        saved_result = iconlist
         return render_template('result.html', result=iconlist)
+    else:
+        if saved_result:
+            return render_template('result.html', result=saved_result)
+        else:
+            return redirect('/main')
+
+
+@app.route('/result-file', methods=['GET','POST'])
+def analyzefile():
+    global saved_result
+    if request.method == 'POST':
+        f = request.files['file']
+        if f:
+            text = str(f.read(), 'utf-8')
+            iconlist = FileReader.fileSplit(text)
+
+            db = firebase.database()
+            labels = [label.val() for label in db.child("Labels").get().each()]
+            for text, labelid in iconlist.items():
+                iconlist[text] = labels[labelid]
+
+            saved_result = iconlist
+            return render_template('result.html', result=iconlist)
+    else:
+        if saved_result:
+            return render_template('result.html', result=saved_result)
+        else:
+            return redirect('/main')
+
+@app.route('/report-main', methods=['POST'])
+def report_main():
+    label = request.form['label']
+    text = request.form['text']
+    report(label, text)
+    return redirect('/main')
+
+@app.route('/report-result', methods=['POST'])
+def report_result():
+    global saved_result
+    label = request.form['label']
+    text = request.form['text']
+    report(label, text)
+    if saved_result:
+        return render_template('result.html', result=saved_result)
     else:
         return redirect('/main')
 
 
-@app.route('/result-file', methods=['POST'])
-def analyzefile():
-    
-    f = request.files['file']
-    if f:
-        text = str(f.read(), 'utf-8')
-        iconlist = FileReader.fileSplit(text)
-        return render_template('result.html', result=iconlist)
+def report(label, text):
+    db = firebase.database()
+    db.child("Reports/"+label).push(text)
+
+
 
 @app.route('/userFeedback')
 def feedback():
-    return render_template('userFeedback.html')
-
-
-@app.route('/reports')
-def reports():
-    return render_template('reports.html')
-
+    global user
+    if user is None:
+        return redirect('/login')
+    else:
+        db = firebase.database()
+        reports = []
+        for category in [label.key() for label in db.child('Reports').get().each()]:
+            for report in [item.val() for item in db.child('Reports/'+category).get().each()]:
+                reports.append((category, report))
+        return render_template('userFeedback.html', reports=reports)
     
 @app.route('/editicon')
 def editicon():
-    return render_template('editicon.html')
+    global user
+    if user is None:
+        return redirect('/login')
+    else:
+        return render_template('editicon.html')
