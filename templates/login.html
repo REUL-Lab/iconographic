@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	
+	
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<!-- jQuery UI style -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/jquery-ui/jquery-ui.min.css') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static', filename='js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+	<![endif]-->
+
+	<!-- jQuery -->
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<!-- jQuery UI -->
+	<script src="{{ url_for('static', filename='js/jquery-ui/jquery-ui.min.js') }}"></script>
+	<!-- jQuery Easing -->
+	<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+	<!-- Bootstrap -->
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<!-- Waypoints -->
+	<script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+	<!-- Stellar -->
+	<script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+
+	<!-- MAIN JS -->
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	</head>
+
+    <body>
+        <h1 class="title">Admin Login</h1>
+            <div id="inputs" class="centered">
+				<form action="login" method="POST">
+					<label><b>Username:</b></label>
+					<input type="email" placeholder="Enter Username" name="username">
+					<br><br>
+					<label><b>Password:</b></label>
+					<input type="password" placeholder="Enter Password" name="password">
+					<br><br>
+					<div id="input-buttons">
+						<input type="submit" formaction="/" value="Back">
+						<input type="submit" value="Submit">
+					</div>
+				</form>
+				{% if error %}
+				<p><strong>Error:</strong> {{ error }}
+				{% endif %}
+            </div>
+    </body>
+
+
+    
+    
+</html>

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#editbox').load('editicon.html #content').hide();
+    $('#editbox').load('/editicon #content').hide();
 
     $('#editbox').on('click', '#editCancel', function(){
       $("#editbox").dialog('close');

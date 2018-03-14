@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>REUL Lab Iconographic Tool</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	
+
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<!-- jQuery UI style -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/jquery-ui/jquery-ui.min.css') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static', filename='js/modernizr-2.6.2.min.js') }}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+	<![endif]-->
+
+	<!-- jQuery -->
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<!-- jQuery UI -->
+	<script src="{{ url_for('static', filename='js/jquery-ui/jquery-ui.min.js') }}"></script>
+	<!-- jQuery Easing -->
+	<script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+	<!-- Bootstrap -->
+	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<!-- Waypoints -->
+	<script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+	<!-- Stellar -->
+	<script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+	<!-- Google Map -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+	<script src="{{ url_for('static', filename='js/google_map.js') }}"></script>
+
+	<!-- MAIN JS -->
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	<!-- ReportComboBox JS 
+	<script src="{{ url_for('static', filename='js/reportcombobox.js') }}"></script>
+		-->
+	<script>		
+
+		function reportClick() {
+			$('#reportbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#reportbox').show();
+		}
+
+		function cancelReport (){
+			$("#reportbox").dialog('close');
+		}
+
+		function helpClick() {
+			$('#helpbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#helpbox').show();
+		}
+
+		function cancelHelp (){
+			$("#helpbox").dialog('close');
+		}
+
+	</script>
+	</head>
+	<body>
+	
+	<div class="title">
+		<h1>REUL Lab Iconographic Tool</h1>
+	</div>
+	<div class="input">
+		<h3 class="title">Choose one:</h3>
+		<ul>
+			<div id="wrapper">
+				<div style="float:left">
+				<form action="result-file" method="POST" enctype = "multipart/form-data">
+						File Input (.doc, .docx, .pdf, .txt): <input type="file" accept=".doc, .docx, .pdf, .txt" name="file" required><br><br>
+						<input type="submit" value="Analyze" >
+				</form>
+				</div>
+				<div style="float:left">
+					<form action="result" method="POST">
+						Text Input:<br><textarea id="text-input" rows="5" cols="80" placeholder="Type or copy EULA text here" name="text" required></textarea><br><br>
+						<input type="submit" value="Analyze" >
+					</form>
+				</div>
+			</div>
+			<p></p>
+			</ul>	
+	</div>
+	<footer>
+		<div id = "wrap" style="text-align:center">
+			<form action="/"><button id="backbutton">Back</button></form>
+			<button id="reportbutton" onclick="reportClick()">Report an Issue </button>
+			<button id="helpbutton" onclick="helpClick()">Help</button>
+		</div>
+	</footer>
+	
+	<div id="reportbox" hidden>
+		<form action="/report-main" method="POST">
+			<select name="label">
+				<option value="Errors">An error ocurred</option>
+				<option value="Concerns">An issue arose</option>
+				<option value="Feedback">User Feedback</option>
+				<option value="Other">Other</option>
+			</select>
+			<br>
+			<br><textarea name="text" placeholder="Type your issue here" style="width:500px; height:300px; resize:none" required></textarea>
+			<br>
+
+			<button id="reportCancel" type="button" onclick="cancelReport()">Cancel</button>
+			<input type="submit" name="report" value="Submit">
+		</form>
+	</div>
+	<div id="helpbox" hidden>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mihi enim satis est, ipsis non satis. Quibus ego vehementer assentior. Sed ea mala virtuti magnitudine obruebantur. Sed residamus, inquit, si placet. Nos vero, inquit ille; Qui est in parvis malis. Satis est ad hoc responsum.
+		</p>
+		<ul>
+			<li>Duo Reges: constructio interrete.</li>
+			<li>Dic in quovis conventu te omnia facere, ne doleas.</li>
+			<li>Non autem hoc: igitur ne illud quidem.</li>
+			<li>Qui autem esse poteris, nisi te amor ipse ceperit?</li>
+		</ul>
+		<br>
+		<button id="cancelButton" onclick="cancelHelp()">Close</button>
+	</div>
+	
+	
+
+	
+	</body>
+</html>
+

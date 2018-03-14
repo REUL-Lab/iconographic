@@ -1,1 +1,4 @@
 .ds_store
+__pycache__
+.vscode
+.pyc

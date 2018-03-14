@@ -16,22 +16,23 @@ margin: 0 4em 0 1em;
 }
 
 textarea {
-width: 50%;
-height: 200px;
+    height: auto;
 
 }
 
 .input ul {
-margin-left: 25%;
-margin-bottom: 1em;
+    margin-left: 25%;
+    margin-bottom: 1em;
 }
 
-#analyze {
-text-align: center;
-margin-right:50%;
-
+#wrapper {
+    text-align: center;
+    width: 100%;
 }
 
+#wrapper form {
+    display: inline;
+}
 
 
 .centered {
