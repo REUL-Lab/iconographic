@@ -59,58 +59,19 @@
         <h1 class="title">User Feedback</h1>
 		<div id="icongrid">
 			<table>
-				<tr>
-
-					<td id="icon1">
-						<p>Unclear Icons</p>
-					</td>
-					<td id = "icon1Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "resolve1">
-						<input type="checkbox">
-					</td>
-				</tr>
-				<tr>
-
-					<td id="icon2">
-						<p>Unclear Descriptions</p>
-					</td>
-					<td id = "icon2Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "resolve2">
-						<input type="checkbox">
-					</td>
-				</tr>
-				<tr>
-
-					<td id="icon3">
-						<p>Button Doesn't work</p>
-					</td>
-					<td id = "icon3Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "resolve3">
-						<input type="checkbox">
-					</td>
-				</tr>
-				<tr>
-
-					<td id="icon4">
-                        <p>Database is not responding</p>
-					</td>
-					<td id = "icon4Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "resolve4">
-						<input type="checkbox">
-					</td>
-				</tr>
+				{% for category, text in reports %}
+					<tr>
+						<td>
+							<p>{{ category }}</p>
+						</td>
+						<td>
+							<p>{{ text }}</p>
+						</td>
+						<td>
+							<input type="checkbox">
+						</td>
+					</tr>
+				{% endfor %}				
 			</table>
 		</div>
 		<p>

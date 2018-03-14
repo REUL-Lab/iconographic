@@ -63,25 +63,36 @@
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-	<!-- ReportComboBox JS -->
+	<!-- ReportComboBox JS 
 	<script src="{{ url_for('static', filename='js/reportcombobox.js') }}"></script>
+		-->
+	<script>		
 
-	<script>
+		function reportClick() {
+			$('#reportbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#reportbox').show();
+		}
 
+		function cancelReport (){
+			$("#reportbox").dialog('close');
+		}
 
-			function helpClick() {
-				$('#helpbox').dialog({
-					modal:true,
-					width:600,
-					height:600
-				});
-				$('#helpbox').show();
-			}
+		function helpClick() {
+			$('#helpbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#helpbox').show();
+		}
 
-			function cancelHelp (){
-				$("#helpbox").dialog('close');
-	  
-			}
+		function cancelHelp (){
+			$("#helpbox").dialog('close');
+		}
 
 	</script>
 	</head>
@@ -113,12 +124,27 @@
 	<footer>
 		<div id = "wrap" style="text-align:center">
 			<form action="/"><button id="backbutton">Back</button></form>
-			<button id="reportbutton">Report an Issue </button>
+			<button id="reportbutton" onclick="reportClick()">Report an Issue </button>
 			<button id="helpbutton" onclick="helpClick()">Help</button>
 		</div>
 	</footer>
 	
-	<div id="reportbox"></div>
+	<div id="reportbox" hidden>
+		<form action="/report-main" method="POST">
+			<select name="label">
+				<option value="Errors">An error ocurred</option>
+				<option value="Concerns">An issue arose</option>
+				<option value="Feedback">User Feedback</option>
+				<option value="Other">Other</option>
+			</select>
+			<br>
+			<br><textarea name="text" placeholder="Type your issue here" style="width:500px; height:300px; resize:none" required></textarea>
+			<br>
+
+			<button id="reportCancel" type="button" onclick="cancelReport()">Cancel</button>
+			<input type="submit" name="report" value="Submit">
+		</form>
+	</div>
 	<div id="helpbox" hidden>
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mihi enim satis est, ipsis non satis. Quibus ego vehementer assentior. Sed ea mala virtuti magnitudine obruebantur. Sed residamus, inquit, si placet. Nos vero, inquit ille; Qui est in parvis malis. Satis est ad hoc responsum.

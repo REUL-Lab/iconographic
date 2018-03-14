@@ -48,90 +48,25 @@
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-
-	<!-- ReportComboBox JS -->
-	<script src="{{ url_for('static', filename='js/adminedit.js') }}"></script>
-
-
-    <script>
-	
-
-	</script>
-
-    
-
-
 	</head>
 
     <body>
-        <h1 class="title">Admin Portal</h1>
+		<h1 class="title">Admin Portal</h1>
 		<div class="icongrid">
 			<table>
+				{% for label, imgurl in labels %}
 				<tr>
-					
-					<td id="icon1">
-						<img src="https://REUL-Lab.github.io/iconographic/images/billing.PNG" alt="billing">
+					<td>
+						<img src="{{ imgurl }}">
 					</td>
-					<td id = "icon1Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+					<td>
+						{{ label }}
 					</td>
-					<td id = "edit1">
+					<td>
 						<button id="iconEdit" onclick="editIcon()"><center>Edit</center></button>
 					</td>
 				</tr>
-				<tr>
-					
-					<td id="icon2">
-						<img src="https://REUL-Lab.github.io/iconographic/images/gagWrap.PNG" alt="gagWrap">
-					</td>
-					<td id = "icon2Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "edit2">
-						<button id="iconEdit" onclick="editIcon()">Edit</button>
-					</td>
-				</tr>
-				<tr>
-					
-					<td id="icon3">
-						<img src="https://REUL-Lab.github.io/iconographic/images/restrictions.PNG" alt="restrictions">
-					</td>
-					<td id = "icon3Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "edit3">
-						<button id="iconEdit" onclick="editIcon()">Edit</button>
-					</td>
-				</tr>
-				<tr>
-					
-					<td id="icon4">
-						<img src="https://REUL-Lab.github.io/iconographic/images/termination.PNG" alt="terminations">
-					</td>
-					<td id = "icon4Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "edit4">
-						<button id="iconEdit" onclick="editIcon()">Edit</button>
-					</td>
-				</tr>
-				<tr>
-					
-					<td id="icon5">
-						<img src="https://REUL-Lab.github.io/iconographic/images/unexpected.PNG" alt="unexpected">
-					</td>
-					<td id = "icon5Description">
-						<h7>Description</h7>
-						<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-					</td>
-					<td id = "edit5">
-						<button id="iconEdit" onclick="editIcon()">Edit</button>
-					</td>
-				</tr>		
+				{% endfor %}
 			</table>
 		</div>
 		<div id="editbox"></div>
@@ -140,11 +75,11 @@
 				<button id = "userfeedback">See User Feedback
 				</button>
 			</form>
-			<form action="login">
+			<form action="logout">
 				<button id ="logout">Logout</button>
 			</form>
 			<form action="/">
-				<button id = "logouthome">Logout to Home</button>
+				<button id = "logouthome">Return to Home</button>
 			</form>
 		</footer>
     </body>
