@@ -3,6 +3,7 @@ from flask import *
 import pyrebase
 import sys
 app = Flask(__name__)
+app.secret_key = 'some_secret'
 config = {
     "apiKey": "AIzaSyBNeqANlaGZOcRX0aT_i1YfDbiCpTgfHqI",
     "authDomain": "flickering-fire-3792.firebaseapp.com",
@@ -46,7 +47,11 @@ def logout():
 def admin():
     global user
     if user is None:
-        return redirect('/login')
+        # For testing only
+        user = "Test"
+        return redirect('/admin')
+        # Actual line
+        # return redirect('/login')
     else:
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
@@ -147,3 +152,15 @@ def editicon():
         return redirect('/login')
     else:
         return render_template('editicon.html')
+
+@app.route('/add-admin', methods=['POST'])
+def add_admin():
+    email = request.form['email']
+    password = request.form['password']
+    try:
+        firebase.auth().create_user_with_email_and_password(email, password)
+        flash("Account added successfully!")
+    except Exception as e:
+        flash(str(e))
+        
+    return redirect('/admin')
