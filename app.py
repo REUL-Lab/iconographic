@@ -47,11 +47,11 @@ def logout():
 def admin():
     global user
     if user is None:
-        # For testing only
-        user = "Test"
-        return redirect('/admin')
-        # Actual line
-        # return redirect('/login')
+    # For testing only
+        # user = "Test"
+        # return redirect('/admin')
+    # Actual line
+        return redirect('/login')
     else:
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
