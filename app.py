@@ -73,7 +73,8 @@ def analyze():
 
         out = open("static/output.txt", "w+")
         for k in iconlist.keys():
-            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+            s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
+            out.write(s.encode("UTF-8"))
         out.close()
 
 
@@ -102,7 +103,8 @@ def analyzefile():
 
             out = open("static/output.txt", "w+", "utf-8")
             for k in iconlist.keys():
-                out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+                s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
+                out.write(s.encode("UTF-8"))
             out.close()
 
             saved_result = iconlist
