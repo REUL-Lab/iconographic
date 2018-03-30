@@ -69,12 +69,7 @@ class FileReader:
 
         #labelvals = [FileReader.labelnames[num] for num in labels]
 
-        output = dict(zip(rawdata, labels))
-        out = open("output.txt", "w+")
-        for k in output.keys():
-            out.write(output[k] + "\n" + k + "----------")
-        out.close()
-        return output
+        return dict(zip(rawdata, labels))
 
     @staticmethod
     def fileSplit(fle):
@@ -92,12 +87,7 @@ class FileReader:
         labels = classifier.predict(data)
        # labelvals = [FileReader.labelnames[num] for num in labels]
 
-        output = dict(zip(rawdata, labels))
-        out = open("output.txt", "w+")
-        for k in output.keys():
-            out.write(output[k] + "\n" + k + "----------")
-        out.close()
-        return output
+        return dict(zip(rawdata, labels))
 
     @staticmethod
     def modifyText(data=[],labels=[]):

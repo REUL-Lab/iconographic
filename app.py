@@ -65,11 +65,16 @@ def analyze():
         if data == "":
             return redirect('/main')
         iconlist = FileReader.textSplit(data)
-        
+
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
+
+        out = open("output.txt", "w+")
+        for k in iconlist.keys():
+            out.write(iconlist[k] + "\n" + k + "----------")
+        out.close()
 
         saved_result = iconlist
         return render_template('result.html', result=iconlist)
@@ -93,6 +98,12 @@ def analyzefile():
             labels = [label.val() for label in db.child("Labels").get().each()]
             for text, labelid in iconlist.items():
                 iconlist[text] = labels[labelid]
+
+            out = open("output.txt", "w+")
+            for k in iconlist.keys():
+                out.write(iconlist[k] + "\n" + k + "----------")
+            out.close()
+
 
             saved_result = iconlist
             return render_template('result.html', result=iconlist)
@@ -139,7 +150,7 @@ def feedback():
             for report in [item.val() for item in db.child('Reports/'+category).get().each()]:
                 reports.append((category, report))
         return render_template('userFeedback.html', reports=reports)
-    
+
 @app.route('/editicon')
 def editicon():
     global user
