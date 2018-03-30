@@ -55,11 +55,12 @@
 					<label><b>Password:</b></label>
 					<input type="password" placeholder="Enter Password" name="password">
 					<br><br>
-					<div id="input-buttons">
-						<input type="submit" formaction="/" value="Back">
-						<input type="submit" value="Submit">
-					</div>
-				</form>
+					
+					<button type="submit" formaction="/" value="Back">Back</button>
+					<button type="submit" value = "Submit">
+						Submit
+					</button>
+									</form>
 				{% if error %}
 				<p><strong>Error:</strong> {{ error }}
 				{% endif %}
