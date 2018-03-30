@@ -91,7 +91,7 @@
 				{% for label, imgurl in labels %}
 				<tr>
 					<td>
-						<img src="{{ imgurl }}">
+						<img src="{{ url_for('static', filename='images/'+imgurl) }}">
 					</td>
 					<td>
 						{{ label }}

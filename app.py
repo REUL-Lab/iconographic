@@ -55,7 +55,7 @@ def admin():
     else:
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
-        imgurls = ["https://REUL-Lab.github.io/iconographic/images/"+label+".png" for label in labels]
+        imgurls = [label+".png" for label in labels]
         return render_template('admin.html', labels=zip(labels,imgurls))
 
 @app.route('/main')

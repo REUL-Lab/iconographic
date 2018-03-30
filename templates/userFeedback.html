@@ -124,9 +124,12 @@
 				if (!$(".selected").length) {
 					alert("To resolve an issue, select it in the table, then press Resolve Issue.");
 				} else {
-					//alert($(".selected").attr("id")+" was selected!");
-					$.post("/resolve", $(".selected").data())
-					window.location.reload()
+					data = $(".selected").data();
+					if(confirm("Resolve issue: "+data["text"]+"?")) {
+						$.post("/resolve", data)
+						window.location.reload()
+					}
+					
 				}
 			});
 		});
@@ -156,7 +159,7 @@
 				<tbody class="scroll-tbody-y table-body">
 					{% for id, category, text, resolved in reports %}
 						{% if not resolved %}
-							<tr data-id="{{ id }}">
+							<tr data-id="{{ id }}" data-text="{{ text }}">
 								<td style="width:25%">
 									<p>{{ category }}</p>
 								</td>
