@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from sklearn import externals
 import pickle
+import re
 
 #This is the way we read through the user input text
 class FileReader:
@@ -46,6 +47,20 @@ class FileReader:
 
 
         #if we want to do things by smaller granularity
+
+        #.*\.\n+(.*[^.]\n+).  regex to get all headers
+        print (text)
+
+        text = re.sub(r'(\n[0-9][0-9]*[\.\)]*)\s*', '', text)
+
+        #regex to remove headers
+        text = re.sub(r'(?!.*([\.\;\,\:]))(.*[^\.])', '', text)
+
+        #regex to remove line numbers and list
+        
+
+        
+
         temp = text.split(".")
         rawdata = []
         for i in range(0, len(temp), 4):
