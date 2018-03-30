@@ -1,3 +1,4 @@
+import textract
 from FileReader import *
 from flask import *
 import pyrebase
@@ -91,24 +92,22 @@ def analyzefile():
     global saved_result
     if request.method == 'POST':
         f = request.files['file']
-        if f:
-            text = str(f.read(), 'utf-8')
-            iconlist = FileReader.fileSplit(text)
+        text = textract.process(f.filename)
+        iconlist = FileReader.fileSplit(text.decode('utf-8'))
 
-            db = firebase.database()
-            labels = [label.val() for label in db.child("Labels").get().each()]
-            for text, labelid in iconlist.items():
-                iconlist[text] = labels[labelid]
+        db = firebase.database()
+        labels = [label.val() for label in db.child("Labels").get().each()]
+        for text, labelid in iconlist.items():
+            iconlist[text] = labels[labelid]
 
-            out = open("static/output.txt", "w+")
-            for k in iconlist.keys():
-                s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
-                s.decode("utf-8", 'ignore')
-                out.write(s)
-            out.close()
+        # out = open("static/output.txt", "w+")
+        # for k in iconlist.keys():
+        #     s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
+        #     out.write(s)
+        # out.close()
 
-            saved_result = iconlist
-            return render_template('result.html', result=iconlist)
+        saved_result = iconlist
+        return render_template('result.html', result=iconlist)
     else:
         if saved_result:
             return render_template('result.html', result=saved_result)
