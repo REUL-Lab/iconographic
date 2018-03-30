@@ -100,7 +100,7 @@
 		</div>
 		<footer>
 			<div id="buttonsresultpage">
-				<a href="{{url_for('/output.txt')}}" download><button id="downloadbutton">Download Summary</button></a>
+				<a href="{{url_for('static', filename ='output.txt')}}" download><button id="downloadbutton">Download Summary</button></a>
 				<form action="/main">
 					<button id="backtomain">Input Another EULA</button>
 				</form>

@@ -71,10 +71,11 @@ def analyze():
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
-        out = open("output.txt", "w+")
+        out = open("static/output.txt", "w+")
         for k in iconlist.keys():
             out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
         out.close()
+
 
         saved_result = iconlist
         return render_template('result.html', result=iconlist)
@@ -99,11 +100,10 @@ def analyzefile():
             for text, labelid in iconlist.items():
                 iconlist[text] = labels[labelid]
 
-            out = open("output.txt", "w+")
+            out = open("static/output.txt", "w+")
             for k in iconlist.keys():
                 out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
             out.close()
-
 
             saved_result = iconlist
             return render_template('result.html', result=iconlist)
