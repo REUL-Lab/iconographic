@@ -10,7 +10,7 @@ class TrainClassifier:
         self.classifier = None
 
     def train(self,data,labels):
-        model = neural_network.MLPClassifier(max_iter=1000)
+        model = neural_network.MLPClassifier(max_iter=500)
         model.fit(data,labels)
         return model
 
@@ -30,7 +30,6 @@ def main():
         reader = csv.reader(csvFile)
         for row in reader:
             text = str(row[0])
-            print(text)
             text = text.replace(u'\xa0',u' ')
             label = int(row[1])
             

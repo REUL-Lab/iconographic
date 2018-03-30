@@ -48,16 +48,50 @@
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+
+	<script>
+		function openAddAdmin() {
+			$('#addbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$('#addbox').show();
+		}
+		
+		function closeAdd() {
+			$('#addbox').dialog('close');
+		}
+
+		function checkPasswords() {
+			if ($('#addform').find('input[name="password"]').val() === $('#addform').find('input[name="confirm"]').val()) {
+				return true;
+			} else {
+				alert("Passwords do not match!");
+				return false;
+			}
+		}
+	
+	</script>
+
 	</head>
 
     <body>
 		<h1 class="title">Admin Portal</h1>
-		<div class="icongrid">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			<p>{{ message }}<p>
+			{% endfor %}
+		{% endif %}
+		{% endwith %}
+		
+		<div id="icongrid">
 			<table>
 				{% for label, imgurl in labels %}
 				<tr>
 					<td>
-						<img src="{{ imgurl }}">
+						<img src="{{ url_for('static', filename='images/'+imgurl) }}">
 					</td>
 					<td>
 						{{ label }}
@@ -70,11 +104,22 @@
 			</table>
 		</div>
 		<div id="editbox"></div>
-		<footer>
+		<div id="addbox" class="centered" hidden>
+			<form action="/add-admin" id="addform" method="POST">
+				<h1>Add New Administrator Account</h1>
+				Email: <input type="email" name="email" required/><br><br>
+				Password: <input type="password" name="password" required/><br><br>
+				Confirm Password: <input type="password" name="confirm" required/><br><br>
+				<button type="button" onclick="closeAdd()">Cancel</button>
+				<input type="submit" onclick="return checkPasswords()" value="Submit"/>				
+			</form>
+		</div>
+		<footer id="adminfooter">
 			<form action = "userFeedback">
 				<button id = "userfeedback">See User Feedback
 				</button>
 			</form>
+			<button id="addadmin" onclick="openAddAdmin()">Add Admin</button>
 			<form action="logout">
 				<button id ="logout">Logout</button>
 			</form>
