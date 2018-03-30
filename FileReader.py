@@ -7,7 +7,7 @@ class FileReader:
 
 
     # labelnames = [
-    #     "None", 
+    #     "None",
     #     "Selling data",
     #     "Gag wrap",
     #     "Data Retention after termination",
@@ -56,7 +56,7 @@ class FileReader:
 
 
         #Import the classifier from the pickle file
-        
+
         #classifier = externals.joblib.load("EULA_Classifier.pkl")
 
         #Uncomment when classifier works
@@ -66,9 +66,9 @@ class FileReader:
         data = vectorizer.transform(rawdata)
         labels = classifier.predict(data)
 
-        
+
         #labelvals = [FileReader.labelnames[num] for num in labels]
-        
+
         return dict(zip(rawdata, labels))
 
     @staticmethod
@@ -86,7 +86,7 @@ class FileReader:
         data = vectorizer.transform(rawdata)
         labels = classifier.predict(data)
        # labelvals = [FileReader.labelnames[num] for num in labels]
-        
+
         return dict(zip(rawdata, labels))
 
     @staticmethod

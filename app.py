@@ -1,3 +1,4 @@
+import textract
 from FileReader import *
 from flask import *
 import pyrebase
@@ -70,11 +71,17 @@ def analyze():
         if data == "":
             return redirect('/main')
         iconlist = FileReader.textSplit(data)
-        
+
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
+
+        out = open("static/output.txt", "w+")
+        for k in iconlist.keys():
+            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+        out.close()
+
 
         saved_result = iconlist
         return render_template('result.html', result=iconlist)
@@ -90,17 +97,22 @@ def analyzefile():
     global saved_result
     if request.method == 'POST':
         f = request.files['file']
-        if f:
-            text = str(f.read(), 'utf-8')
-            iconlist = FileReader.fileSplit(text)
+        text = textract.process(f.filename)
+        iconlist = FileReader.fileSplit(text.decode('utf-8'))
 
-            db = firebase.database()
-            labels = [label.val() for label in db.child("Labels").get().each()]
-            for text, labelid in iconlist.items():
-                iconlist[text] = labels[labelid]
+        db = firebase.database()
+        labels = [label.val() for label in db.child("Labels").get().each()]
+        for text, labelid in iconlist.items():
+            iconlist[text] = labels[labelid]
 
-            saved_result = iconlist
-            return render_template('result.html', result=iconlist)
+        # out = open("static/output.txt", "w+")
+        # for k in iconlist.keys():
+        #     s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
+        #     out.write(s)
+        # out.close()
+
+        saved_result = iconlist
+        return render_template('result.html', result=iconlist)
     else:
         if saved_result:
             return render_template('result.html', result=saved_result)
@@ -147,7 +159,7 @@ def feedback():
         for key, report in [(item.key(), item.val()) for item in db.child('Reports').get().each()]:
                 reports.append((key, report["category"], report["text"], report["resolved"]))
         return render_template('userFeedback.html', reports=reports)
-    
+
 @app.route('/editicon')
 def editicon():
     global user
