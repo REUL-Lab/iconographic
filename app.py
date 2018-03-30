@@ -103,7 +103,8 @@ def analyzefile():
             out = open("static/output.txt", "w+")
             for k in iconlist.keys():
                 s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
-                out.write(s.encode("UTF-8"))
+                ss = unicode(s, "utf-8")
+                out.write(s)
             out.close()
 
             saved_result = iconlist
