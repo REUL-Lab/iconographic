@@ -100,7 +100,7 @@ def analyzefile():
             for text, labelid in iconlist.items():
                 iconlist[text] = labels[labelid]
 
-            out = open("static/output.txt", "w+")
+            out = open("static/output.txt", "w+", "utf-8")
             for k in iconlist.keys():
                 out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
             out.close()
