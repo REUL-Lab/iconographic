@@ -137,10 +137,10 @@ def feedback():
     global user
     if user is None:
     # For testing only
-        user = "Test"
-        return redirect('/userFeedback')
+        # user = "Test"
+        # return redirect('/userFeedback')
     # Actual line
-        # return redirect('/login')
+        return redirect('/login')
     else:
         db = firebase.database()
         reports = []
