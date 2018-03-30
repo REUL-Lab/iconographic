@@ -101,7 +101,7 @@ def analyzefile():
 
             out = open("output.txt", "w+")
             for k in iconlist.keys():
-                out.write("\r\n" + iconlist[k] + "\r\n" + "\r\n" + k + "\r\n" + "\r\n" + "----------" + "\r\n" + "\r\n")
+                out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
             out.close()
 
 
