@@ -73,8 +73,7 @@ def analyze():
 
         out = open("static/output.txt", "w+")
         for k in iconlist.keys():
-            s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
-            out.write(s.encode("UTF-8"))
+            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
         out.close()
 
 
@@ -101,7 +100,7 @@ def analyzefile():
             for text, labelid in iconlist.items():
                 iconlist[text] = labels[labelid]
 
-            out = open("static/output.txt", "w+", "utf-8")
+            out = open("static/output.txt", "w+")
             for k in iconlist.keys():
                 s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
                 out.write(s.encode("UTF-8"))
