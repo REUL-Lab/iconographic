@@ -128,7 +128,7 @@ def report_result():
 
 def report(label, text):
     db = firebase.database()
-    db.child("Reports/"+label).push(text)
+    db.child("Reports").push({"category":label, "text":text, "resolved":False})
 
 
 
@@ -136,13 +136,16 @@ def report(label, text):
 def feedback():
     global user
     if user is None:
-        return redirect('/login')
+    # For testing only
+        user = "Test"
+        return redirect('/userFeedback')
+    # Actual line
+        # return redirect('/login')
     else:
         db = firebase.database()
         reports = []
-        for category in [label.key() for label in db.child('Reports').get().each()]:
-            for report in [item.val() for item in db.child('Reports/'+category).get().each()]:
-                reports.append((category, report))
+        for key, report in [(item.key(), item.val()) for item in db.child('Reports').get().each()]:
+                reports.append((key, report["category"], report["text"], report["resolved"]))
         return render_template('userFeedback.html', reports=reports)
     
 @app.route('/editicon')
@@ -164,3 +167,18 @@ def add_admin():
         flash(str(e))
         
     return redirect('/admin')
+
+@app.route('/resolve', methods=['POST'])
+def resolve():
+    issueid = request.form['id']
+    if not issueid:
+        flash("No issue selected!")
+    else:
+        try:
+            db = firebase.database()
+            db.child("Reports").child(issueid).update({"resolved":True})
+        except Exception as e:
+            flash(str(e))
+
+    return redirect('/userFeedback')
+
