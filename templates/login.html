@@ -46,8 +46,9 @@
 	</head>
 
     <body>
-        <h1 class="title">Admin Login</h1>
-            <div id="inputs" class="centered">
+        <h1 class="title" style="margin-top: 10vw;font-size: 40px">Admin Login</h1>
+        <p></p>
+            <div id="inputs" class="centered" style="font-size: 25px">
 				<form action="login" method="POST">
 					<label><b>Username:</b></label>
 					<input type="email" placeholder="Enter Username" name="username">
@@ -55,10 +56,11 @@
 					<label><b>Password:</b></label>
 					<input type="password" placeholder="Enter Password" name="password">
 					<br><br>
-					<div id="input-buttons">
-						<input type="submit" formaction="/" value="Back">
-						<input type="submit" value="Submit">
-					</div>
+					
+					<button type="submit" formaction="/" value="Back">Back</button>
+					<button type="submit" value = "Submit">
+						Submit
+					</button>
 				</form>
 				{% if error %}
 				<p><strong>Error:</strong> {{ error }}
