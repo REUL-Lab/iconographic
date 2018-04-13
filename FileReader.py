@@ -14,7 +14,7 @@ class FileReader:
         #if we want to do things by smaller granularity
 
         #.*\.\n+(.*[^.]\n+).  regex to get all headers
-        print (text)
+        # print (text)
 
         text = re.sub(r'(\n[0-9][0-9]*[\.\)]*)\s*', '', text)
 

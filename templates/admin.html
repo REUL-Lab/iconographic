@@ -218,6 +218,10 @@
 		<div style="text-align:right; margin-right:10vw;">
 			<button id="editicon" onclick="editIcon()">Edit Icon Details</button>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
 		<div id="editbox" hidden>
 			<form action="/edit-icon" method="POST">
 				Label Name: <input id="labelname" name="name" type="text" size="50"/><br><br>
@@ -225,17 +229,17 @@
 				Description: <br><textarea id="desc" name="desc" rows="4" cols="50"></textarea><br><br>
 				<input type="number" id="labelindex" name="index" hidden />
 				<button type="button" onclick="closeEdit()">Cancel</button>
-				<input type="submit" value="Submit" />
+				<button type="submit" value="Submit" />Submit</button>
 			</form>
 		</div>
 		<div id="addbox" class="centered" hidden>
-			<form action="/add-admin" id="addform" method="POST">
+			<form action="/add-admin" id="addform" method="POST" style=>
 				<h1>Add New Administrator Account</h1>
-				Email: <input type="email" name="email" required/><br><br>
-				Password: <input type="password" name="password" required/><br><br>
-				Confirm Password: <input type="password" name="confirm" required/><br><br>
+				Email: <br><input type="email" name="email" required/><br><br>
+				Password: <br> <input type="password" name="password" required/><br><br>
+				Confirm Password: <br><input type="password" name="confirm" required/><br><br>
 				<button type="button" onclick="closeAdd()">Cancel</button>
-				<input type="submit" onclick="return checkPasswords()" value="Submit"/>				
+				<button type="submit" onclick="return checkPasswords()" value="Submit"/>Submit</button>				
 			</form>
 		</div>
 		<footer id="adminfooter">

@@ -153,6 +153,9 @@ button {
     margin-right: 20vw;
 }
 
+#userFeedBack {
+    display: inline-block;
+}
 
 #buttonsresultpage {
     margin: 0 auto;
