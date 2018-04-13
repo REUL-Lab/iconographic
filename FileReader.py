@@ -49,7 +49,6 @@ class FileReader:
         #if we want to do things by smaller granularity
 
         #.*\.\n+(.*[^.]\n+).  regex to get all headers
-        print (text)
 
         text = re.sub(r'(\n[0-9][0-9]*[\.\)]*)\s*', '', text)
 
@@ -84,12 +83,34 @@ class FileReader:
         classifier = externals.joblib.load("EULA_Classifier.pkl")
         vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
         data = vectorizer.transform(rawdata)
-        labels = classifier.predict(data)
+
+        all_labels = []
+        for clf in classifier:
+            labels = clf.predict(data)
+            all_labels.append(labels)
+
+        print (len(all_labels))
+
+        final_labels = []
+        for i in range(len(rawdata)):
+
+            curr_labels = {}
+            for j in all_labels:
+                if j[i] in curr_labels:
+                    curr_labels[j[i]] += 1
+                else:
+                    curr_labels[j[i]] = 1
+
+            if (len(curr_labels) == len(all_labels)):
+                final_labels.append(0)
+            else:
+                final_labels.append(max(curr_labels, key=curr_labels.get))
+
 
         
         #labelvals = [FileReader.labelnames[num] for num in labels]
         
-        return dict(zip(rawdata, labels))
+        return dict(zip(rawdata, final_labels))
 
     @staticmethod
     def fileSplit(fle):
