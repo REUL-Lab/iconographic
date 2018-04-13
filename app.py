@@ -1,4 +1,4 @@
-import textract
+#import textract
 from FileReader import *
 from flask import *
 import pyrebase
