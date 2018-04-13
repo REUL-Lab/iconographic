@@ -99,11 +99,10 @@ def analyzefile():
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
-        # out = open("static/output.txt", "w+")
-        # for k in iconlist.keys():
-        #     s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
-        #     out.write(s)
-        # out.close()
+        out = open("static/output.txt", "w+")
+        for k in iconlist.keys():
+            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+        out.close()
 
         session["result"] = iconlist
         return render_template('result.html', result=iconlist)
@@ -182,7 +181,7 @@ def add_admin():
         flash("Account added successfully!")
     except Exception as e:
         flash(str(e))
-        
+
     return redirect('/admin')
 
 @app.route('/resolve', methods=['POST'])
