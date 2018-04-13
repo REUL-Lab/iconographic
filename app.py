@@ -14,40 +14,37 @@ config = {
     "messagingSenderId": "189921954509"
 }
 firebase = pyrebase.initialize_app(config)
-user = None
-saved_result = None
 
 @app.route('/', methods=['GET','POST'])
 def start():
+    session["user"] = None
+    session["result"] = None
     return render_template('index.html')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    global user
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         try:
-            user = firebase.auth().sign_in_with_email_and_password(username, password)
+            session["user"] = firebase.auth().sign_in_with_email_and_password(username, password)
             return redirect('/admin')
         except Exception as e:
             return render_template('login.html', error=e)
     else:
-        if user is None:
+        if not session["user"]:
             return render_template('login.html', error="")
         else:
             return redirect('/admin')
 
 @app.route('/logout')
 def logout():
-    global user
-    user = None
+    session["user"] = None
     return redirect('/login')
 
 @app.route('/admin')
 def admin():
-    global user
-    if user is None:
+    if session["user"] is None:
     # For testing only
         # user = "Test"
         # return redirect('/admin')
@@ -56,8 +53,7 @@ def admin():
     else:
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
-        imgurls = [label+".png" for label in labels]
-        return render_template('admin.html', labels=zip(labels,imgurls))
+        return render_template('admin.html', labels=labels)
 
 @app.route('/main')
 def main():
@@ -65,7 +61,6 @@ def main():
 
 @app.route('/result', methods=['GET', 'POST'])
 def analyze():
-    global saved_result
     if request.method == 'POST':
         data = request.form['text']
         if data == "":
@@ -73,7 +68,7 @@ def analyze():
         iconlist = FileReader.textSplit(data)
 
         db = firebase.database()
-        labels = [label.val() for label in db.child("Labels").get().each()]
+        labels = [label.val()["name"] for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
@@ -83,39 +78,37 @@ def analyze():
         out.close()
 
 
-        saved_result = iconlist
+        session["result"] = iconlist
         return render_template('result.html', result=iconlist)
     else:
-        if saved_result:
-            return render_template('result.html', result=saved_result)
+        if session["result"]:
+            return render_template('result.html', result=session["result"])
         else:
             return redirect('/main')
 
 
 @app.route('/result-file', methods=['GET','POST'])
 def analyzefile():
-    global saved_result
     if request.method == 'POST':
         f = request.files['file']
         text = textract.process(f.filename)
         iconlist = FileReader.fileSplit(text.decode('utf-8'))
 
         db = firebase.database()
-        labels = [label.val() for label in db.child("Labels").get().each()]
+        labels = [label.val()["name"] for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
-        # out = open("static/output.txt", "w+")
-        # for k in iconlist.keys():
-        #     s = "\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n"
-        #     out.write(s)
-        # out.close()
+        out = open("static/output.txt", "w+")
+        for k in iconlist.keys():
+            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+        out.close()
 
-        saved_result = iconlist
+        session["result"] = iconlist
         return render_template('result.html', result=iconlist)
     else:
-        if saved_result:
-            return render_template('result.html', result=saved_result)
+        if session["result"]:
+            return render_template('result.html', result=session["result"])
         else:
             return redirect('/main')
 
@@ -128,12 +121,11 @@ def report_main():
 
 @app.route('/report-result', methods=['POST'])
 def report_result():
-    global saved_result
     label = request.form['label']
     text = request.form['text']
     report(label, text)
-    if saved_result:
-        return render_template('result.html', result=saved_result)
+    if session["result"]:
+        return render_template('result.html', result=session["result"])
     else:
         return redirect('/main')
 
@@ -146,8 +138,7 @@ def report(label, text):
 
 @app.route('/userFeedback')
 def feedback():
-    global user
-    if user is None:
+    if not session["user"]:
     # For testing only
         # user = "Test"
         # return redirect('/userFeedback')
@@ -160,13 +151,26 @@ def feedback():
                 reports.append((key, report["category"], report["text"], report["resolved"]))
         return render_template('userFeedback.html', reports=reports)
 
-@app.route('/editicon')
+@app.route('/edit-icon', methods=["POST"])
 def editicon():
-    global user
-    if user is None:
-        return redirect('/login')
-    else:
-        return render_template('editicon.html')
+    name = request.form["name"]
+    url = request.form["url"]
+    desc = request.form["desc"]
+    index = request.form["index"]
+
+    if not url.endswith(".png") and not url.endswith(".jpg"):
+        url = url + ".png"
+
+    data = {
+        "Labels/"+index: {
+            "name" : name,
+            "imgurl" : url,
+            "description" : desc
+        }
+    }
+    firebase.database().update(data)
+    return redirect("/admin")
+
 
 @app.route('/add-admin', methods=['POST'])
 def add_admin():
@@ -177,7 +181,7 @@ def add_admin():
         flash("Account added successfully!")
     except Exception as e:
         flash(str(e))
-        
+
     return redirect('/admin')
 
 @app.route('/resolve', methods=['POST'])
