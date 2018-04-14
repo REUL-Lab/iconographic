@@ -44,6 +44,11 @@ def logout():
 
 @app.route('/admin')
 def admin():
+    try:
+        _ = session["user"]
+    except Exception as e:
+        session["user"] = None
+
     if session["user"] is None:
     # For testing only
         # user = "Test"
@@ -57,6 +62,11 @@ def admin():
 
 @app.route('/main')
 def main():
+    try:
+        _ = session["result"]
+    except Exception as e:
+        session["result"] = None
+
     return render_template('main.html')
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -138,7 +148,12 @@ def report(label, text):
 
 @app.route('/userFeedback')
 def feedback():
-    if not session["user"]:
+    try:
+        _ = session["user"]
+    except Exception as e:
+        session["user"] = None
+
+    if session["user"] is None:
     # For testing only
         # user = "Test"
         # return redirect('/userFeedback')

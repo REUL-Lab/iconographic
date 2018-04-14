@@ -8,3 +8,8 @@ Install dependencies by double clicking the "install dependencies.bat" file in t
 
 To run the website, double click on the run.bat file, then open a browser and navigate to http://localhost:5000.
 
+
+Note:
+    Test administrator account:
+        username: test@example.com
+        password: password
