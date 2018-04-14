@@ -153,6 +153,9 @@ button {
     margin-right: 20vw;
 }
 
+#userFeedBack {
+    display: inline-block;
+}
 
 #buttonsresultpage {
     margin: 0 auto;
@@ -182,11 +185,13 @@ margin: 10px;
     overflow:auto;
     border: 1px solid black;
 }
-
+#resolve {
+    margin-left:54vw;
+}
 #icongrid {
 margin: 0 auto;
 width: 75vw; 
-height:70vh; 
+height:60vh; 
 overflow:auto;
 border: 1px solid black;
 }

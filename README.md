@@ -1,12 +1,15 @@
-Instructions for use:
+Instructions for use (windows server only):
 
-Requires python to be installed.
+Requires python 3.6 to be installed (https://www.python.org/downloads/).  
 
-Install swig from https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download?use_mirror=superb-dca2 and add to path environment variable
+Install swig from https://sourceforge.net/projects/swig/files/swigwin/swigwin-3.0.12/swigwin-3.0.12.zip/download?use_mirror=superb-dca2 by extracting the file and running the .exe file by double clicking. Once the install completes, add "C:\Program Files (x86)\swigwin-3.0.12\" to the path environment variable (see https://www.computerhope.com/issues/ch000549.htm for instructions on setting environment variables).
 
-To install dependencies, run "pip install -r requirements.txt" on command line.
+Install dependencies by double clicking the "install dependencies.bat" file in this directory.
 
-To run:
+To run the website, double click on the run.bat file, then open a browser and navigate to http://localhost:5000.
 
-Windows: click on the run.bat, then navigate to http://localhost:5000
-Mac: Right click on the run file (not run.bat), go to "Show Info", and change permissions to 755 (only needs to be done once).  Then open terminal and type ./run, then navigate to http://localhost:5000
+
+Note:
+    Test administrator account:
+        username: test@example.com
+        password: password

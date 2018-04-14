@@ -48,24 +48,24 @@ def main():
 
     
     classifier = cls.train(data,labels)
-    # kf = model_selection.KFold(n_splits = 4)
-    # classifiers = []
-    # for trainI, testI in kf.split(data, labels):
+    kf = model_selection.KFold(n_splits = 5)
+    classifiers = []
+    for trainI, testI in kf.split(data, labels):
         
-    #     dataTrain, dataTest = data[trainI], data[testI]
-    #     labelTrain, labelTest = labels[trainI], labels[testI]
-    #     print (labelTrain)
-    #     clf = cls.train(dataTrain, labelTrain)
-    #     predictLabels = cls.test(dataTest, clf)
-    #     # print("Confusion Matrix:\n",metrics.confusion_matrix(labelTest, predictLabels))
-    #     # print("Accuracy: ", metrics.accuracy_score(labelTest, predictLabels))
-    #     # print("F1 score: ", metrics.f1_score(labelTest, predictLabels, average='micro'))
+        dataTrain, dataTest = data[trainI], data[testI]
+        labelTrain, labelTest = labels[trainI], labels[testI]
+        clf = cls.train(dataTrain, labelTrain)
+        predictLabels = cls.test(dataTest, clf)
+        classifiers.append(clf)
+        print("Confusion Matrix:\n",metrics.confusion_matrix(labelTest, predictLabels))
+        print("Accuracy: ", metrics.accuracy_score(labelTest, predictLabels))
+        print("F1 score: ", metrics.f1_score(labelTest, predictLabels, average='micro'))
 
-    predictLabels = cls.test(data,classifier)
-    print("Confusion Matrix:\n",metrics.confusion_matrix(labels, predictLabels))
-    print("Accuracy: ", metrics.accuracy_score(labels, predictLabels))
-    print("F1 score: ", metrics.f1_score(labels, predictLabels, average='micro'))
-    externals.joblib.dump(classifier, "EULA_Classifier.pkl")
+    # predictLabels = cls.test(data,classifier)
+    # print("Confusion Matrix:\n",metrics.confusion_matrix(labels, predictLabels))
+    # print("Accuracy: ", metrics.accuracy_score(labels, predictLabels))
+    # print("F1 score: ", metrics.f1_score(labels, predictLabels, average='micro'))
+    externals.joblib.dump(classifiers, "EULA_Classifier.pkl")
 
 
 
