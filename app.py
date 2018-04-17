@@ -42,6 +42,7 @@ def logout():
     session["user"] = None
     return redirect('/login')
 
+
 @app.route('/admin')
 def admin():
     try:
@@ -59,6 +60,18 @@ def admin():
         db = firebase.database()
         labels = [label.val() for label in db.child("Labels").get().each()]
         return render_template('admin.html', labels=labels)
+
+@app.route('/reset-password', methods=["POST"])
+def reset():
+    email = request.form["username"]
+    try:
+        firebase.auth().send_password_reset_email(email)
+        flash("Password reset email sent!")
+    except Exception as e:
+        flash(e)
+    return redirect('/login')
+
+
 
 @app.route('/main')
 def main():

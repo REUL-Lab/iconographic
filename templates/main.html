@@ -74,7 +74,9 @@
 				width:600,
 				height:600
 			});
+			$(".ui-dialog-titlebar").hide();
 			$('#reportbox').show();
+			
 		}
 
 		function cancelReport (){
@@ -87,6 +89,7 @@
 				width:600,
 				height:600
 			});
+			$(".ui-dialog-titlebar").hide();
 			$('#helpbox').show();
 		}
 
@@ -130,6 +133,7 @@
 	</footer>
 	
 	<div id="reportbox" hidden>
+		<h1>Report an Issue</h1>
 		<form action="/report-main" method="POST">
 			<select name="label">
 				<option value="Errors">An error ocurred</option>

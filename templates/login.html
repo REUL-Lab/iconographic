@@ -43,29 +43,71 @@
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+	<script>
+		function forgetDialog() {
+			$("#forgetemail").val($("#email").val());
+			$('#forgetbox').dialog({
+				modal:true,
+				width:600,
+				height:600
+			});
+			$(".ui-dialog-titlebar").hide();
+			$('#forgetbox').show();
+			
+		}
+
+		function cancelForget(){
+			$("#forgetbox").dialog('close');
+		}
+
+
+		
+
+
+	</script>
+
+
+
 	</head>
 
     <body>
         <h1 class="title" style="margin-top: 10vw;font-size: 40px">Admin Login</h1>
         <p></p>
-            <div id="inputs" class="centered" style="font-size: 25px">
-				<form action="login" method="POST">
-					<label><b>Username:</b></label>
-					<input type="email" placeholder="Enter Username" name="username">
-					<br><br>
-					<label><b>Password:</b></label>
-					<input type="password" placeholder="Enter Password" name="password">
-					<br><br>
-					
-					<button type="submit" formaction="/" value="Back">Back</button>
-					<button type="submit" value = "Submit">
-						Submit
-					</button>
-				</form>
-				{% if error %}
-				<p><strong>Error:</strong> {{ error }}
-				{% endif %}
-            </div>
+		<div id="inputs" class="centered" style="font-size: 25px">
+			<form action="login" method="POST">
+				<label><b>Email:</b></label>
+				<input type="email" id="email" placeholder="Enter Email Address" name="username">
+				<br><br>
+				<label><b>Password:</b></label>
+				<input type="password" placeholder="Enter Password" name="password">
+				<br><br>
+				
+				<button type="submit" formaction="/" value="Back">Back</button>
+				<button type="submit" value = "Submit">
+					Submit
+				</button>
+			</form><br>
+			<a href="javascript:forgetDialog()">Forgot Password?</a>
+			{% if error %}
+			<p><strong>Error:</strong> {{ error }}
+			{% endif %}
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+				<p>{{ message }}<p>
+				{% endfor %}
+			{% endif %}
+			{% endwith %}
+		</div>
+		<div id="forgetbox" hidden>
+			<h1>Forgot password?</h1><br><br>
+			<form action="/reset-password" method="POST">
+				<label><b>Email Address:</b></label>
+				<input type="email" id="forgetemail" placeholder="Enter Email Address" name="username"><br><br>
+				<button type = "submit" name = "reset" value = "Submit">Send Password Reset Email</button><br>
+				<button id="forgotCancel" type="button" onclick="cancelForget()">Cancel</button>
+			</form>
+			</div>
     </body>
 
 
