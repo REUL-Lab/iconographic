@@ -42,6 +42,11 @@ def logout():
     session["user"] = None
     return redirect('/login')
 
+@app.route('/popular')
+def popular():
+    session["user"] = None
+    return render_template('popular.html', error="")
+
 @app.route('/admin')
 def admin():
     try:
