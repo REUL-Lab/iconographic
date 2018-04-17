@@ -30,9 +30,14 @@ def login():
             session["user"] = firebase.auth().sign_in_with_email_and_password(username, password)
             return redirect('/admin')
         except Exception as e:
-            return render_template('login.html', error=e)
+            message = str(e)
+            index = message.find("\"message\": \"")
+            end = message.find("\"", index+12)
+            print(index, end)
+            error = message[index+12 : end]
+            return render_template('login.html', error=error)
     else:
-        if not session["user"]:
+        if not session["user"]: 
             return render_template('login.html', error="")
         else:
             return redirect('/admin')
@@ -68,7 +73,12 @@ def reset():
         firebase.auth().send_password_reset_email(email)
         flash("Password reset email sent!")
     except Exception as e:
-        flash(e)
+        message = str(e)
+        index = message.find("\"message\": \"")
+        end = message.find("\"", index+12)
+        print(index, end)
+        error = message[index+12 : end]
+        flash(error)
     return redirect('/login')
 
 
@@ -208,7 +218,12 @@ def add_admin():
         firebase.auth().create_user_with_email_and_password(email, password)
         flash("Account added successfully!")
     except Exception as e:
-        flash(str(e))
+        message = str(e)
+        index = message.find("\"message\": \"")
+        end = message.find("\"", index+12)
+        print(index, end)
+        error = message[index+12 : end]
+        flash(error)
 
     return redirect('/admin')
 
@@ -222,7 +237,12 @@ def resolve():
             db = firebase.database()
             db.child("Reports").child(issueid).update({"resolved":True})
         except Exception as e:
-            flash(str(e))
+            message = str(e)
+            index = message.find("\"message\": \"")
+            end = message.find("\"", index+12)
+            print(index, end)
+            error = message[index+12 : end]
+            flash(error)
 
     return redirect('/userFeedback')
 
