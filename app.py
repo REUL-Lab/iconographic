@@ -68,13 +68,13 @@ def analyze():
         iconlist = FileReader.textSplit(data)
 
         db = firebase.database()
-        labels = [label.val()["name"] for label in db.child("Labels").get().each()]
+        labels = [label.val() for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
         out = open("static/output.txt", "w+")
         for k in iconlist.keys():
-            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+            out.write("\n" + iconlist[k]["name"] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
         out.close()
 
 
@@ -91,7 +91,9 @@ def analyze():
 def analyzefile():
     if request.method == 'POST':
         f = request.files['file']
+    
         text = textract.process(f.filename)
+
         iconlist = FileReader.fileSplit(text.decode('utf-8'))
 
         db = firebase.database()
@@ -112,7 +114,7 @@ def analyzefile():
             return render_template('result.html', result=session["result"])
         else:
             return redirect('/main')
-
+            
 @app.route('/report-main', methods=['POST'])
 def report_main():
     label = request.form['label']

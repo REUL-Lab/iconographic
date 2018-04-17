@@ -54,7 +54,7 @@
 	-->
 	<script>
 		function stall() {
-			setTimeout(showPage, 2);
+			setTimeout(showPage, 2000);
 		}
 
 		function reportClick() {
@@ -84,11 +84,11 @@
 		<h1 class="title">Here is a summary of your EULA</h1>
 		<div class="icongridResult">
 			<table width = "1000" align = "center">
-				{% for text, label in result.items() %}
+				{% for text, dict in result.items() %}
 				<tr>
 					<td colspan="2">
-						<!-- <img src="https://REUL-Lab.github.io/iconographic/images/{{ icon }}.PNG"> -->
-						{{ label }}
+						<img src="{{ url_for('static', filename='images/'+dict['imgurl']) }}">
+						{{ dict["name"] }}
 					</td>
 					<td>
 						<p> {{ text }} </p>
