@@ -135,13 +135,13 @@ def analyzefile():
         iconlist = FileReader.fileSplit(text.decode('utf-8'))
 
         db = firebase.database()
-        labels = [label.val()["name"] for label in db.child("Labels").get().each()]
+        labels = [label.val() for label in db.child("Labels").get().each()]
         for text, labelid in iconlist.items():
             iconlist[text] = labels[labelid]
 
         out = open("static/output.txt", "w+")
         for k in iconlist.keys():
-            out.write("\n" + iconlist[k] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
+            out.write("\n" + iconlist[k]["name"] + "\n" + "\n" + k + "\n" + "\n" + "----------" + "\n" + "\n")
         out.close()
 
         session["result"] = iconlist
