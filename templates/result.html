@@ -88,7 +88,8 @@
 				<tr>
 					<td class = "res" id = "pic">
 						<img src="{{ url_for('static', filename='images/'+dict['imgurl']) }}">
-						{{ dict["name"] }}
+						{{ dict["name"] }}<br><br><br>
+						<span>{{ dict["description"] }}</span>
 					</td>
 					<td class = "res" id = "results">
 						<p> {{ text }} </p>
