@@ -249,7 +249,7 @@ height: 100%;
 position: relative;
 padding-bottom: 50px;
 font-family: "Work Sans",sans-serif;
-font-size: 16px;
+font-size: 20px;
 line-height: 1.875em;
 letter-spacing: 0;
 color: #7e8890;
@@ -287,9 +287,14 @@ text-decoration: none;
 }
 #pic {
     width:20vw;
+    text-align: center;
 }
 #results {
     width: 80vw;
+}
+#imageDescription {
+    margin: auto;
+    text-align: center;
 }
 p {
 margin-bottom: 1.5em;
@@ -319,10 +324,9 @@ font-weight: 300;
 margin: center;
 font-size:50px;
 text-align:center;
-margin-top:5vh;
+margin-top:2vh;
 
 }
-
 
 
 

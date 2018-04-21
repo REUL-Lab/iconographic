@@ -86,10 +86,13 @@
 			<table id = "resultIconGrid" width = "1000" align = "center">
 				{% for text, dict in result.items() %}
 				<tr>
+
 					<td class = "res" id = "pic">
-						<img src="{{ url_for('static', filename='images/'+dict['imgurl']) }}">
-						{{ dict["name"] }}<br><br><br>
-						<span>{{ dict["description"] }}</span>
+						<div class = "imageDescription">
+							<img src="{{ url_for('static', filename='images/'+dict['imgurl']) }}">
+							{{ dict["name"] }}<br><br><br>
+							<span>{{ dict["description"] }}</span>
+						</div>
 					</td>
 					<td class = "res" id = "results">
 						<p> {{ text }} </p>
