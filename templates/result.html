@@ -83,14 +83,14 @@
 		<div id="result" hidden="hidden">
 		<h1 class="title">Here is a summary of your EULA</h1>
 		<div class="icongridResult">
-			<table width = "1000" align = "center">
+			<table id = "resultIconGrid" width = "1000" align = "center">
 				{% for text, dict in result.items() %}
 				<tr>
-					<td colspan="2">
+					<td class = "res" id = "pic">
 						<img src="{{ url_for('static', filename='images/'+dict['imgurl']) }}">
 						{{ dict["name"] }}
 					</td>
-					<td>
+					<td class = "res" id = "results">
 						<p> {{ text }} </p>
 					</td>
 				</tr>
