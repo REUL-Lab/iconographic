@@ -39,9 +39,6 @@
 	<script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
 	<!-- Stellar -->
 	<script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
-	<!-- Google Map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="{{ url_for('static', filename='js/google_map.js') }}"></script>
 
 	<!-- MAIN JS -->
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
@@ -109,6 +106,11 @@
 			background: -moz-linear-gradient(top, #606060, #909090);
 			color: #dadada;
 		}
+
+		button:disabled {
+			opacity: 0.6;
+    		cursor: not-allowed;
+		}
 		
 		</style>
 
@@ -117,7 +119,11 @@
 			$("tbody tr").click(function () {
 				$('.selected').removeClass('selected');
 				$(this).addClass("selected");
-				
+				if ($(this).data()["status"] === "True") {
+					$("#resolve").prop('disabled', true);
+				} else {
+					$("#resolve").prop('disabled', false);
+				}
         	});
 
 			$("#resolve").click(function(){
@@ -154,20 +160,26 @@
 					<tr> 
 						<th>Category</th>
 						<th>Details</th>
+						<th>Status</th>
 					</tr> 
 				</thead>
 				<tbody class="scroll-tbody-y table-body">
 					{% for id, category, text, resolved in reports %}
-						{% if not resolved %}
-							<tr data-id="{{ id }}" data-text="{{ text }}">
-								<td style="width:25%">
-									<span>{{ category }}</span>
-								</td>
-								<td style="width:75%">
-									<span>{{ text }}</span>
-								</td>
-							</tr>
-						{% endif %}
+						<tr data-id="{{ id }}" data-text="{{ text }}" data-status="{{ resolved }}">
+							<td style="width:25%">
+								<span>{{ category }}</span>
+							</td>
+							<td style="width:60%">
+								<span>{{ text }}</span>
+							</td>
+							<td style="width:15%">
+								{% if resolved %}
+									<span>Resolved</span>
+								{% else %}
+									<span>Pending</span>
+								{% endif %}
+							</td>
+						</tr>
 					{% endfor %}	
 				</tbody>			
 			</table>
@@ -179,7 +191,7 @@
 		<form action="/admin">
 			<button id ="back">Back</button>
 		</form>
-			<button id="resolve">Resolve Issue</button>
+			<button id="resolve" disabled>Resolve Issue</button>
 		
 		
 		
