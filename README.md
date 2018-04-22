@@ -6,11 +6,17 @@
 **Features**
 
 ● Content of End-User Licensing Agreements (EULA) displayed through icons
+
 ● User can download the analysis summary of EULA
+
 ● Admin functionality of changing icon names, descriptions, and images
+
 ● Displays the analysis of the most popular EULAs
+
 ● New admin accounts can be added
+
 ● User has ability to submit report if error is encountered somewhere in the site
+
 ● Summary of the meaning of icons listed at the top of the results page
 
 **Bug Fixes**
