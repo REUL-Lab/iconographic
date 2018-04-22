@@ -22,19 +22,26 @@
 **Bug Fixes**
 
 ● Status of issue shown; resolved issues cannot resolved for a second time (error prevention)
+
 ● Database error message parsed to give user clear indication of encountered problem
+
 ● Accepted file input types now includes .pdf,.doc,.txt
+
 ● Implemented session persistence so admin stays logged in even if they navigate to new page
 
 **Known Bugs**
 
 ● When another user tries to analyze an EULA while the first user is on the results page, the download a
 summary button will download the results of the second user’s result
+
 ● Only docx files can be analyzed on the tool; older versions of word documents will not work for analysis
+
 ● When resolving an issue, sometimes the issue will not disappear immediately. If this should happen, refresh
 the page and the resolved issue should disappear
+
 ● When reading in EULA for analysis either through file or plain text, some of the characters will be changed
 due to unicode errors
+
 ● If a user reports an issue from the results page, it will redirect the user to the “Input an EULA” page
 
 
