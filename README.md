@@ -1,9 +1,8 @@
 # iconographic
 
+## Release Update - April 20, 2018 
 
-# Release Update - April 20, 2018
-
-**Features**
+**Features** 
 
 ● Content of End-User Licensing Agreements (EULA) displayed through icons
 
