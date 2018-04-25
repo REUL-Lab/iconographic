@@ -1,9 +1,12 @@
 import textract
 from FileReader import *
 from flask import *
+from werkzeug import secure_filename
 import pyrebase
 import sys
+import os
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = './static/images/'
 app.secret_key = 'some_secret'
 config = {
     "apiKey": "AIzaSyBNeqANlaGZOcRX0aT_i1YfDbiCpTgfHqI",
@@ -17,7 +20,10 @@ firebase = pyrebase.initialize_app(config)
 
 @app.route('/', methods=['GET','POST'])
 def start():
-    session["user"] = None
+    try:
+        _ = session["user"]
+    except Exception as e:
+        session["user"] = None
     session["result"] = None
     return render_template('index.html')
 
@@ -254,4 +260,14 @@ def resolve():
             flash(error)
 
     return redirect('/userFeedback')
+
+@app.route('/add-image', methods=["POST"])
+def upload_image():
+    try:
+        f = request.files['image']
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(f.filename)))
+        flash("Image Uploaded Successfully")
+    except Exception as e:
+        flash(str(e))
+    return redirect('/admin')
 
