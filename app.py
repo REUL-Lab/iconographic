@@ -237,12 +237,14 @@ def add_admin():
 @app.route('/resolve', methods=['POST'])
 def resolve():
     issueid = request.form['id']
+    status = request.form['status']
+    print(status)
     if not issueid:
         flash("No issue selected!")
     else:
         try:
             db = firebase.database()
-            db.child("Reports").child(issueid).update({"resolved":True})
+            db.child("Reports").child(issueid).update({"resolved": status != "True"})
         except Exception as e:
             message = str(e)
             index = message.find("\"message\": \"")

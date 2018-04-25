@@ -119,10 +119,11 @@
 			$("tbody tr").click(function () {
 				$('.selected').removeClass('selected');
 				$(this).addClass("selected");
+				$("#resolve").prop('disabled', false);
 				if ($(this).data()["status"] === "True") {
-					$("#resolve").prop('disabled', true);
+					$("#resolve").html("Unresolve Issue");
 				} else {
-					$("#resolve").prop('disabled', false);
+					$("#resolve").html("Resolve Issue");
 				}
         	});
 
@@ -131,7 +132,8 @@
 					alert("To resolve an issue, select it in the table, then press Resolve Issue.");
 				} else {
 					data = $(".selected").data();
-					if(confirm("Resolve issue: "+data["text"]+"?")) {
+					message = (data["status"] === "True" ? "Unresolve Issue: " : "Resolve issue: ")+data["text"]+"?"
+					if(confirm(message)) {
 						$.post("/resolve", data)
 						window.location.reload()
 					}
